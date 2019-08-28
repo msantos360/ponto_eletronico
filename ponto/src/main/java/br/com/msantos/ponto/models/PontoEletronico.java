@@ -44,17 +44,17 @@ public class PontoEletronico {
 
 	@ManyToOne
 	private Funcionario funcionario;
-
+	
 	@Transient
 	protected EstadoAtualPonto estado;
-	
+
+	/**Hibernate only**/
+	@Deprecated
 	public PontoEletronico() {}
 
 	public PontoEletronico(Funcionario funcionario, LocalDateTime inicioJornada, LocalDateTime inicioIntervalo, LocalDateTime terminoIntervalo,
 			LocalDateTime terminoJornada) {
-
-		this.estado = new EstadoInicioJornada();
-
+		
 		this.inicioJornada = inicioJornada;
 		this.inicioIntervalo = inicioIntervalo;
 		this.terminoIntervalo = terminoIntervalo;
@@ -108,6 +108,36 @@ public class PontoEletronico {
 	public void validaTerminoJornada() {
 		
 		estado.terminoJornada(this);
+	}
+
+	//Refatorar este metodo
+	public void baterCartao() {
+		
+		if (getInicioJornada() == null) {
+			System.out.println("set 1");
+			this.estado = new EstadoInicioJornada();
+			validaInicioJornada();
+			return;
+		}
+		
+		if (getInicioIntervalo() == null) {
+			System.out.println("set 2");
+			this.estado = new EstadoInicioIntervalo();
+			validaInicioIntervalo();
+			return;
+			
+		} else if (getTerminoIntervalo() == null) {
+			System.out.println("set 3");
+			this.estado = new EstadoTerminoIntervalo();
+			validaTerminoIntervalo();
+			return;
+			
+		} else if (getTerminoJornada() == null) {
+			System.out.println("set 4");
+			this.estado = new EstadoTerminoJornada();
+			validaTerminoJornada();
+			return;
+		}
 	}
 
 	public Duration tempoPermanenciaJornadaDiaria() {

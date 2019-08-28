@@ -60,8 +60,12 @@ public class JornadaTrabalho {
 	
 	@OneToOne
 	private Funcionario funcionario;
+	
+	/**Hibernate only**/
+	@Deprecated
+	public JornadaTrabalho(){}
 
-	public JornadaTrabalho(TipoTrabalhador tipoTrabalhador, LocalTime inicioJornada,
+	public JornadaTrabalho(Funcionario funcionario,TipoTrabalhador tipoTrabalhador, LocalTime inicioJornada,
 			LocalTime terminoJornada, Duration cargaHorariaSemanal, Duration tempoIntervalo,
 			boolean trabalhaSabado, boolean trabalhaDomingo, boolean trabalhaFeriado) {
 
@@ -73,6 +77,7 @@ public class JornadaTrabalho {
 		this.trabalhaSabado = trabalhaSabado;
 		this.trabalhaDomingo = trabalhaDomingo;
 		this.trabalhaFeriado = trabalhaFeriado;
+		this.funcionario = funcionario;
 
 		determinaTempoAdicional();
 		validaTempoDeIntervalo();

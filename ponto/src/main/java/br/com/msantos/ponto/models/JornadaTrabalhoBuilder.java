@@ -21,6 +21,13 @@ public class JornadaTrabalhoBuilder {
 
 	private boolean trabalhaFeriado = false;
 	
+	private Funcionario funcionario;
+	
+	public JornadaTrabalhoBuilder comFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+		return this;
+	}
+	
 	public JornadaTrabalhoBuilder comInicioJornada(int hora, int minuto) {
 		this.inicioJornada = LocalTime.of(hora, minuto);
 		return this;
@@ -62,7 +69,7 @@ public class JornadaTrabalhoBuilder {
 	}
 
 	public JornadaTrabalho builder() {
-		return new JornadaTrabalho(tipoTrabalhador, inicioJornada, terminoJornada, cargaHorariaSemanal,
+		return new JornadaTrabalho(funcionario, tipoTrabalhador, inicioJornada, terminoJornada, cargaHorariaSemanal,
 				tempoIntervalo,	trabalhaSabado, trabalhaDomingo, trabalhaFeriado);
 	}
 
