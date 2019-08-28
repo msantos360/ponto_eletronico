@@ -22,8 +22,8 @@ public class EstadoTerminoIntervalo implements EstadoAtualPonto {
 	public void terminoIntervalo(PontoEletronico pontoEletronico) {
 		
 		System.out.println("Voltando do intervalo");
-		pontoEletronico.estado = new EstadoTerminoJornada();
 //		pontoEletronico.terminoIntervalo = LocalDateTime.now();
+		pontoEletronico.estado = new EstadoTerminoJornada();
 		
 		LocalDate date = LocalDate.now();
 		pontoEletronico.terminoIntervalo = LocalDateTime.of(date , LocalTime.of(13, 30));

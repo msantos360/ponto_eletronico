@@ -27,8 +27,8 @@ public class EstadoTerminoJornada implements EstadoAtualPonto {
 	@Override
 	public void terminoJornada(PontoEletronico pontoEletronico) {
 		System.out.println("Termino de espediente");
-		pontoEletronico.estado = new EstadoTerminoJornada();
 //		pontoEletronico.terminoJornada = LocalDateTime.now();
+		pontoEletronico.estado = new EstadoTerminoJornada();
 		
 		LocalDate date = LocalDate.now();
 		pontoEletronico.terminoJornada = LocalDateTime.of(date , LocalTime.of(16, 30));

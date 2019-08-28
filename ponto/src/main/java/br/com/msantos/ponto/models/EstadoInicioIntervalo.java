@@ -15,8 +15,8 @@ public class EstadoInicioIntervalo implements EstadoAtualPonto {
 	@Override
 	public void inicioIntervalo(PontoEletronico pontoEletronico) {
 		System.out.println("Saindo para o intervalo");
-		pontoEletronico.estado = new EstadoTerminoIntervalo();
 //		pontoEletronico.inicioIntervalo = LocalDateTime.now();
+		pontoEletronico.estado = new EstadoTerminoIntervalo();
 		
 		LocalDate date = LocalDate.now();
 		pontoEletronico.inicioIntervalo = LocalDateTime.of(date , LocalTime.of(12, 30));
