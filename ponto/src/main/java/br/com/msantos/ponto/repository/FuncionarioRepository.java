@@ -8,5 +8,5 @@ import br.com.msantos.ponto.models.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long>{
 
-	public Optional<Funcionario> findByCpf(String cpf); 
+	Optional<Funcionario> findByCpf(String cpf); 
 }
