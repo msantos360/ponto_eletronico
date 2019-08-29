@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import br.com.msantos.ponto.repository.EmpresaRepository;
 import br.com.msantos.ponto.repository.FuncionarioRepository;
 import br.com.msantos.ponto.repository.JornadaTrabalhoRepository;
 import br.com.msantos.ponto.repository.PontoEletronicoRepository;
@@ -25,21 +26,28 @@ public class FuncionarioTest {
 	FuncionarioRepository funcionarioRepository;
 
 	@Autowired
-	PontoEletronicoRepository pontoEletronicoRepository;
+	private PontoEletronicoRepository pontoEletronicoRepository;
 
+	@Autowired
+	private EmpresaRepository empresaRepository;
+	
 	private JornadaTrabalho jornadaTrabalho = null;
+
+	private Empresa empresa;
 
 	@Before
 	public void criaJornadaDeTrabalho() {
 		jornadaTrabalho = new JornadaTrabalhoBuilder().comInicioJornada(8, 00).comTerminoJornada(17, 00)
 				.comTipoTrabalhador(TipoTrabalhador.RURAL).comCargaHorariaSemanal(36).comSabado().builder();
+		
+		empresa = empresaRepository.findByCnpj("16036746000195").get();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void naoDevePermiteCpfIncorreto() {
 
 		new Funcionario(jornadaTrabalho, "43865969097", "Paulo", LocalDate.now(), Sexo.M, "2569-9856",
-				"teste@teste.com", true);
+				"teste@teste.com", true, empresa);
 
 	}
 
@@ -47,7 +55,7 @@ public class FuncionarioTest {
 	public void naoDevePermitirDataDeNascimentoDeMenoresDeDezoitoAnos() {
 
 		LocalDate dataNascimento = LocalDate.of(2005, 8, 23);
-		new Funcionario(jornadaTrabalho, "43865969097", "Paulo", dataNascimento, Sexo.M, "1234", "teste", true);
+		new Funcionario(jornadaTrabalho, "43865969097", "Paulo", dataNascimento, Sexo.M, "1234", "teste", true, empresa);
 
 	}
 
@@ -55,14 +63,14 @@ public class FuncionarioTest {
 	public void retiraPontuacaoDeCpf() {
 		LocalDate dataNascimento = LocalDate.of(2000, 8, 23);
 		new Funcionario(jornadaTrabalho, "438.659.690-97", "Paulo", dataNascimento, Sexo.M, "2569-9856",
-				"teste@teste.com", true);
+				"teste@teste.com", true, empresa);
 	}
 
 	@Test
 	public void funcionarioComFuncionarioBuider() {
 		new FuncionarioBuilder().comCpf("43865969097").comDataNascimento(20, 2, 2000).comSexo(Sexo.M)
 				.comTelefone("2659-0000").comJornadaDeTrabalho(jornadaTrabalho).comEmail("teste@teste.com")
-				.estaAtivo(true).comNome("Paulo").builder();
+				.estaAtivo(true).comNome("Paulo").comEmpresa(empresa).builder();
 
 	}
 
@@ -71,7 +79,7 @@ public class FuncionarioTest {
 
 		new FuncionarioBuilder().comDataNascimento(20, 2, 2000).comSexo(Sexo.M).comTelefone("2659-0000")
 				.comJornadaDeTrabalho(jornadaTrabalho).comEmail("teste@teste.com").estaAtivo(true).comNome("Paulo")
-				.builder();
+				.comEmpresa(empresa).builder();
 
 	}
 
@@ -118,7 +126,7 @@ public class FuncionarioTest {
 
 	@Test
 	public void testePontoDoBancoDeDadosSelect() {
-		Optional<PontoEletronico> pontoJoanaDoBanco = pontoEletronicoRepository.findById((long) 1);
+		Optional<PontoEletronico> pontoJoanaDoBanco = pontoEletronicoRepository.findById((long) 8);
 		System.out.println(pontoJoanaDoBanco.get().getInicioJornada());
 
 		System.out.println(pontoJoanaDoBanco.get().tempoDeAtrasadoInicioJornada());
@@ -126,31 +134,31 @@ public class FuncionarioTest {
 	}
 
 	// cpf 19532110542, 30083209450
-	@Test
-	public void testaBateCartaoFuncionario() {
-
-		Optional<Funcionario> funcionario = funcionarioRepository.findByCpf("63873882108");
-
-		if (funcionario.isPresent()) {
-			Optional<PontoEletronico> ponto = pontoEletronicoRepository
-					.findByPontoAtualDoFuncionario(funcionario.get());
-
-			if (ponto.isPresent()) {
-				ponto.get().bateCartao();
-				pontoEletronicoRepository.save(ponto.get());
-			
-			} else {
-				PontoEletronico newPonto = new PontoEletronicoBuilder()
-						.comFuncionario(funcionario.get())
-						.buider();
-				
-				newPonto.bateCartao();
-				pontoEletronicoRepository.save(newPonto);
-				
-			}
-			
-		}
-
-	}
+//	@Test
+//	public void testaBateCartaoFuncionario() {
+//
+//		Optional<Funcionario> funcionario = funcionarioRepository.findByCpf("63873882108");
+//
+//		if (funcionario.isPresent()) {
+//			Optional<PontoEletronico> ponto = pontoEletronicoRepository
+//					.findByPontoAtualDoFuncionario(funcionario.get());
+//
+//			if (ponto.isPresent()) {
+//				ponto.get().bateCartao();
+//				pontoEletronicoRepository.save(ponto.get());
+//			
+//			} else {
+//				PontoEletronico newPonto = new PontoEletronicoBuilder()
+//						.comFuncionario(funcionario.get())
+//						.buider();
+//				
+//				newPonto.bateCartao();
+//				pontoEletronicoRepository.save(newPonto);
+//				
+//			}
+//			
+//		}
+//
+//	}
 
 }
