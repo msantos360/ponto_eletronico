@@ -19,6 +19,13 @@ public class FuncionarioBuilder {
 	private boolean ativo;
 
 	private JornadaTrabalho jornadaTrabalho;
+
+	private Empresa empresa;
+
+	public FuncionarioBuilder comEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+		return this;
+	}
 	
 	public FuncionarioBuilder comJornadaDeTrabalho(JornadaTrabalho jornadaTrabalho) {
 		this.jornadaTrabalho = jornadaTrabalho;
@@ -62,7 +69,7 @@ public class FuncionarioBuilder {
 	}
 
 	public Funcionario builder() {
-		return new Funcionario(jornadaTrabalho, cpf, nome, dataNascimento, sexo, telefone, email, ativo);
+		return new Funcionario(jornadaTrabalho, cpf, nome, dataNascimento, sexo, telefone, email, ativo, empresa);
 	}
 
 }

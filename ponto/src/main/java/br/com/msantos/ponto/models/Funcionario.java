@@ -70,7 +70,7 @@ public class Funcionario {
 	}
 
 	public Funcionario(JornadaTrabalho jornadaTrabalho, String cpf, String nome, LocalDate dataNascimento, Sexo sexo, String telefone, String email,
-			boolean ativo) {
+			boolean ativo, Empresa empresa) {
 
 		if (cpf == null || nome == null || dataNascimento == null) {
 			throw new IllegalArgumentException("O campos CPF, NOME, DATA DE NASCIMENTO E SEXO são requeridos");
@@ -92,6 +92,7 @@ public class Funcionario {
 		this.ativo = ativo;
 		this.nome = nome;
 		this.jornadaTrabalho = jornadaTrabalho;
+		this.empresa = empresa;
 	}
 	
 	public JornadaTrabalho getJornadaTrabalho() {
