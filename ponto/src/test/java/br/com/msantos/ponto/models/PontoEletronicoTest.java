@@ -220,6 +220,16 @@ public class PontoEletronicoTest {
 		}
 
 	}
+	
+	@Test
+	public void selectPontoPorTransacaoId() {
+		
+		PontoEletronico transacao = pontoRepository.findByTransacaoId("T1567036928285");
+		
+		String transacaoEsperada = "T1567036928285";
+		
+		assertEquals(transacaoEsperada, transacao.getTransacaoId());
+	}
 
 	/*
 	 * interjornada 11h

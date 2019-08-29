@@ -22,4 +22,7 @@ public interface PontoEletronicoRepository extends JpaRepository<PontoEletronico
 				@Param("inicio") LocalDateTime inicio,
 				@Param("termino") LocalDateTime termino);
 	
+	PontoEletronico findByTransacaoId(String transacaoId);
+	
+	
 }

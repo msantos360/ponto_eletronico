@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -59,6 +60,9 @@ public class Funcionario {
 	
 	@OneToMany(mappedBy = "funcionario", fetch = FetchType.EAGER)
 	private Set<PontoEletronico> pontoEletronico = new HashSet<>();
+	
+	@ManyToOne
+	private Empresa empresa;
 
 	/**Hibernate only**/
 	@Deprecated
@@ -102,6 +106,10 @@ public class Funcionario {
 		return id;
 	}
 	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	
 	public Set<PontoEletronico> getPontoEletronico() {
 		return pontoEletronico;
 	}
@@ -142,6 +150,11 @@ public class Funcionario {
 	@Deprecated
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@Deprecated
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 	
 	@Deprecated
