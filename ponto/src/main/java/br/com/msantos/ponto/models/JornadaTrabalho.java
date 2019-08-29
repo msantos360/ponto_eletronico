@@ -1,5 +1,8 @@
 package br.com.msantos.ponto.models;
-
+/**Métodos com @Deprecate são exclusivos para o funcionamento do Hibernate. Uso não é autorizado
+ * 
+ * Michael Santos 28/AGO/2019
+ * **/
 import java.time.Duration;
 import java.time.LocalTime;
 

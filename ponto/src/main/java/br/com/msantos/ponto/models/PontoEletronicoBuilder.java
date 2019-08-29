@@ -14,6 +14,20 @@ public class PontoEletronicoBuilder {
 
 	private Funcionario funcionario;
 	
+	private boolean diaEncerrado;
+	
+	private boolean justificativa;
+	
+	public PontoEletronicoBuilder comJustificativa(boolean justificativa) {
+		this.justificativa = justificativa;
+		return this;
+	}
+	
+	public PontoEletronicoBuilder comDiaEncerrado(boolean diaEncerrado) {
+		this.diaEncerrado = diaEncerrado;
+		return this;
+	}
+	
 	public PontoEletronicoBuilder comFuncionario(Funcionario funcionario) {
 		
 		this.funcionario = funcionario;
@@ -45,6 +59,6 @@ public class PontoEletronicoBuilder {
 	}
 	
 	public PontoEletronico buider() {
-		return new PontoEletronico(funcionario, inicioJornada, inicioIntervalo, terminoIntervalo, terminoJornada);
+		return new PontoEletronico(funcionario, inicioJornada, inicioIntervalo, terminoIntervalo, terminoJornada, diaEncerrado, justificativa);
 	}
 }

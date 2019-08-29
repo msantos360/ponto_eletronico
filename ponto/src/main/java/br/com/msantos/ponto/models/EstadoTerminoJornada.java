@@ -1,8 +1,8 @@
 package br.com.msantos.ponto.models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+
+import br.com.msantos.ponto.integracoes.Email;
 
 public class EstadoTerminoJornada implements EstadoAtualPonto {
 
@@ -27,11 +27,15 @@ public class EstadoTerminoJornada implements EstadoAtualPonto {
 	@Override
 	public void terminoJornada(PontoEletronico pontoEletronico) {
 		System.out.println("Termino de espediente");
-//		pontoEletronico.terminoJornada = LocalDateTime.now();
+		pontoEletronico.terminoJornada = LocalDateTime.now();
 		pontoEletronico.estado = new EstadoTerminoJornada();
 		
-		LocalDate date = LocalDate.now();
-		pontoEletronico.terminoJornada = LocalDateTime.of(date , LocalTime.of(16, 30));
+//		LocalDate date = LocalDate.now();
+//		pontoEletronico.terminoJornada = LocalDateTime.of(date , LocalTime.of(16, 30));
+		
+		//Encerra a jornada de trabalho
+		pontoEletronico.setDiaEncerrado(true);
+		new Email().executa(pontoEletronico);
 	}
 
 }

@@ -1,13 +1,18 @@
 package br.com.msantos.ponto.models;
-
+/**Métodos com @Deprecate são exclusivos para o funcionamento do Hibernate. Uso não é autorizado
+ * 
+ * Michael Santos 28/AGO/2019
+ * **/
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,8 +57,8 @@ public class Funcionario {
 	@OneToOne(mappedBy = "funcionario")
 	private JornadaTrabalho jornadaTrabalho;
 	
-	@OneToMany(mappedBy = "funcionario")
-	private List<PontoEletronico> pontoEletronico;
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.EAGER)
+	private Set<PontoEletronico> pontoEletronico = new HashSet<>();
 
 	/**Hibernate only**/
 	@Deprecated
@@ -97,7 +102,7 @@ public class Funcionario {
 		return id;
 	}
 	
-	public List<PontoEletronico> getPontoEletronico() {
+	public Set<PontoEletronico> getPontoEletronico() {
 		return pontoEletronico;
 	}
 
@@ -140,7 +145,7 @@ public class Funcionario {
 	}
 	
 	@Deprecated
-	public void setPontoEletronico(List<PontoEletronico> pontoEletronico) {
+	public void setPontoEletronico(Set<PontoEletronico> pontoEletronico) {
 		this.pontoEletronico = pontoEletronico;
 	}
 	
