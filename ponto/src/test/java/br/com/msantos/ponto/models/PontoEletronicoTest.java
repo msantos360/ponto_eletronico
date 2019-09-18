@@ -3,9 +3,7 @@ package br.com.msantos.ponto.models;
 import static org.junit.Assert.assertEquals;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Set;
 
 import org.junit.Before;
@@ -29,7 +27,7 @@ public class PontoEletronicoTest {
 	private FuncionarioRepository funcionarioRepository;
 
 	private Funcionario paulo;
-	
+
 	private JornadaTrabalho jornadaTrabalho;
 
 	@Before
@@ -179,56 +177,36 @@ public class PontoEletronicoTest {
 		assertEquals(duracaoEsperada, pontoPaulo.tempoPermanenciaJornadaDiaria());
 	}
 
-	@Test
-	public void validaEntradasESaidasDoFuncionarioComEstado() {
-
-		PontoEletronico pontoPauloComEstado = new PontoEletronicoBuilder().comFuncionario(paulo).buider();
-
-		pontoPauloComEstado.validaInicioJornada();
-		pontoPauloComEstado.validaInicioIntervalo();
-		pontoPauloComEstado.validaTerminoIntervalo();
-		pontoPauloComEstado.validaTerminoJornada();
-
-		LocalDate date = LocalDate.now();
-		LocalDateTime inicioJornadaEsperada = LocalDateTime.of(date, LocalTime.of(8, 00));
-		LocalDateTime inicioIntervaloEsperado = LocalDateTime.of(date, LocalTime.of(12, 30));
-		LocalDateTime terminoIntervaloEsperado = LocalDateTime.of(date, LocalTime.of(13, 30));
-		LocalDateTime terminoJornadaEsperada = LocalDateTime.of(date, LocalTime.of(16, 30));
-
-		assertEquals(inicioJornadaEsperada, pontoPauloComEstado.getInicioJornada());
-		assertEquals(inicioIntervaloEsperado, pontoPauloComEstado.getInicioIntervalo());
-		assertEquals(terminoIntervaloEsperado, pontoPauloComEstado.getTerminoIntervalo());
-		assertEquals(terminoJornadaEsperada, pontoPauloComEstado.getTerminoJornada());
-
-	}
-	
-	//63873882108
+	// 63873882108
 	@Test
 	public void selectPontoPorFuncionarioEporPeriodo() {
-		
+
 		LocalDateTime inicio = LocalDateTime.of(2019, 8, 1, 0, 0);
-		LocalDateTime termino  = LocalDateTime.of(2019, 8, 28, 23, 59);
-		
+		LocalDateTime termino = LocalDateTime.of(2019, 8, 28, 23, 59);
+
 		PontoSelectBuilder psb = new PontoSelectBuilder().comFuncionarioRepository(funcionarioRepository)
-		.comPontoRepository(pontoRepository)
-		.comCPF("63873882108").comDataInicioEm(inicio).comDataTerminoEm(termino);
-		
+				.comPontoRepository(pontoRepository).comCPF("63873882108").comDataInicioEm(inicio)
+				.comDataTerminoEm(termino);
+
 		Set<PontoEletronico> listaPonto = new PontoEletronico().pontoPorFuncionariosEperiodo(psb);
-		
-		for (PontoEletronico pontoEletronico : listaPonto) {
-			System.out.println(pontoEletronico.getTerminoJornada());
-		}
+
+		listaPonto.forEach(l -> System.out.println(l.getTerminoJornada()));
 
 	}
-	
+
 	@Test
 	public void selectPontoPorTransacaoId() {
-		
+
 		PontoEletronico transacao = pontoRepository.findByTransacaoId("T1567036928285");
-		
+
 		String transacaoEsperada = "T1567036928285";
-		
+
 		assertEquals(transacaoEsperada, transacao.getTransacaoId());
+	}
+
+	@Test
+	public void validaSeHouveInterjornada() {
+
 	}
 
 	/*

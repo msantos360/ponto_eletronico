@@ -15,14 +15,17 @@ public interface PontoEletronicoRepository extends JpaRepository<PontoEletronico
 
 	@Query("select p from PontoEletronico p where p.funcionario = :funcionario and p.diaEncerrado is false and p.justificativa is false")
 	Optional<PontoEletronico> findByPontoAtualDoFuncionario(@Param("funcionario") Funcionario funcionario);
-	
+
 	@Query("select p from PontoEletronico p where p.funcionario = :funcionario "
 			+ "and p.inicioJornada between :inicio and :termino order by p.inicioJornada")
 	Set<PontoEletronico> findByPontoAndPeriodo(@Param("funcionario") Funcionario funcionario,
-				@Param("inicio") LocalDateTime inicio,
-				@Param("termino") LocalDateTime termino);
-	
+			@Param("inicio") LocalDateTime inicio, @Param("termino") LocalDateTime termino);
+
 	PontoEletronico findByTransacaoId(String transacaoId);
-	
-	
+
+	//Validar este select
+	@Query("select p from PontoEletronico p where p.terminoJornada = :diaAnterior and p.funcionario = :funcionario")
+	PontoEletronico findInterjornada(@Param("diaAnterior") LocalDateTime diaAnterior,
+			@Param("funcionario") Funcionario funcionario);
+
 }

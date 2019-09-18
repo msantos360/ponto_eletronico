@@ -6,5 +6,5 @@ import br.com.msantos.ponto.models.JornadaTrabalho;
 
 public interface ValidadorDuracaoJornadaTrabalho {
 
-	public Duration calcula(JornadaTrabalho jornadaTrabalho);
+	Duration calcula(JornadaTrabalho jornadaTrabalho);
 }

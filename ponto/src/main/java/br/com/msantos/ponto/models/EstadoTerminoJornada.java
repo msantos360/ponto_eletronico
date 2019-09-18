@@ -6,27 +6,28 @@ import br.com.msantos.ponto.integracoes.Email;
 
 public class EstadoTerminoJornada implements EstadoAtualPonto {
 
+	private String mensagem = "Funcionário deve terminar a jornada de trabalho.";
+	
 	@Override
 	public void inicioJornada(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode volvar ao inicio da jornada");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void inicioIntervalo(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode volvar ao inicio do intervalo");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void terminoIntervalo(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode volvar ao termino do intervalo");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void terminoJornada(PontoEletronico pontoEletronico) {
-		System.out.println("Termino de espediente");
 		pontoEletronico.terminoJornada = LocalDateTime.now();
 		pontoEletronico.estado = new EstadoTerminoJornada();
 		

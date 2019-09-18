@@ -30,7 +30,7 @@ public class FuncionarioTest {
 
 	@Autowired
 	private EmpresaRepository empresaRepository;
-	
+
 	private JornadaTrabalho jornadaTrabalho = null;
 
 	private Empresa empresa;
@@ -39,7 +39,7 @@ public class FuncionarioTest {
 	public void criaJornadaDeTrabalho() {
 		jornadaTrabalho = new JornadaTrabalhoBuilder().comInicioJornada(8, 00).comTerminoJornada(17, 00)
 				.comTipoTrabalhador(TipoTrabalhador.RURAL).comCargaHorariaSemanal(36).comSabado().builder();
-		
+
 		empresa = empresaRepository.findByCnpj("16036746000195").get();
 	}
 
@@ -55,7 +55,8 @@ public class FuncionarioTest {
 	public void naoDevePermitirDataDeNascimentoDeMenoresDeDezoitoAnos() {
 
 		LocalDate dataNascimento = LocalDate.of(2005, 8, 23);
-		new Funcionario(jornadaTrabalho, "43865969097", "Paulo", dataNascimento, Sexo.M, "1234", "teste", true, empresa);
+		new Funcionario(jornadaTrabalho, "43865969097", "Paulo", dataNascimento, Sexo.M, "1234", "teste", true,
+				empresa);
 
 	}
 
@@ -83,47 +84,6 @@ public class FuncionarioTest {
 
 	}
 
-//	@Test
-//	public void cadastraFuncionarioEJornadaNoBancoDeDados() {
-//
-//		Funcionario funcionario = new FuncionarioBuilder().comNome("Michael Santos")
-//				.comCpf("63873882108")
-//				.comDataNascimento(20, 02, 1995)
-//				.comSexo(Sexo.M)
-//				.comTelefone("6228971430")
-//				.estaAtivo(true)
-//				.comEmail("michael.shel96@gmail.com").builder();
-//
-//		funcionarioRepository.save(funcionario);
-//		
-//		JornadaTrabalho jornadaDeTrabalhoJoana = new JornadaTrabalhoBuilder()
-//			.comTipoTrabalhador(TipoTrabalhador.URBANO)
-//			.comCargaHorariaSemanal(44)
-//			.comIntervaloOptional(60)
-//			.comInicioJornada(8, 00)
-//			.comTerminoJornada(18, 00)
-//			.comFuncionario(funcionario)
-//			.builder();
-//		
-//		jornadaTrabalhoRepository.save(jornadaDeTrabalhoJoana);
-//		
-//	}
-
-//	@Test
-//	public void cadastraPonto() {
-//		
-//		Funcionario funcionariaJoanaBanco = funcionarioRepository.findById((long) 2).get();
-//		
-//		PontoEletronico pontoJoana = new PontoEletronicoBuilder()
-//				.comFuncionario(funcionariaJoanaBanco)
-//				.buider();
-//		
-//		pontoJoana.baterCartao();
-//
-//		pontoEletronicoRepository.save(pontoJoana);
-//		
-//	}
-
 	@Test
 	public void testePontoDoBancoDeDadosSelect() {
 		Optional<PontoEletronico> pontoJoanaDoBanco = pontoEletronicoRepository.findById((long) 8);
@@ -132,33 +92,5 @@ public class FuncionarioTest {
 		System.out.println(pontoJoanaDoBanco.get().tempoDeAtrasadoInicioJornada());
 
 	}
-
-	// cpf 19532110542, 30083209450
-//	@Test
-//	public void testaBateCartaoFuncionario() {
-//
-//		Optional<Funcionario> funcionario = funcionarioRepository.findByCpf("63873882108");
-//
-//		if (funcionario.isPresent()) {
-//			Optional<PontoEletronico> ponto = pontoEletronicoRepository
-//					.findByPontoAtualDoFuncionario(funcionario.get());
-//
-//			if (ponto.isPresent()) {
-//				ponto.get().bateCartao();
-//				pontoEletronicoRepository.save(ponto.get());
-//			
-//			} else {
-//				PontoEletronico newPonto = new PontoEletronicoBuilder()
-//						.comFuncionario(funcionario.get())
-//						.buider();
-//				
-//				newPonto.bateCartao();
-//				pontoEletronicoRepository.save(newPonto);
-//				
-//			}
-//			
-//		}
-//
-//	}
 
 }

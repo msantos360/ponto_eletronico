@@ -148,57 +148,46 @@ public class Funcionario {
 		return new CPF(cpf).isValido();
 	}
 
-	@Deprecated
 	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	@Deprecated
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
 	
-	@Deprecated
 	public void setPontoEletronico(Set<PontoEletronico> pontoEletronico) {
 		this.pontoEletronico = pontoEletronico;
 	}
 	
-	@Deprecated
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	@Deprecated
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	@Deprecated
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
-	@Deprecated
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 
-	@Deprecated
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
-	@Deprecated
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	@Deprecated
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
 	}
 
-	@Deprecated
 	public void setJornadaTrabalho(JornadaTrabalho jornadaTrabalho) {
 		this.jornadaTrabalho = jornadaTrabalho;
 	}

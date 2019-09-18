@@ -6,6 +6,6 @@ import br.com.msantos.ponto.models.PontoEletronico;
 
 public interface ValidadorDuracaoPonto {
 
-	public Duration calcula(PontoEletronico ponto);
+	Duration calcula(PontoEletronico ponto);
 	
 }

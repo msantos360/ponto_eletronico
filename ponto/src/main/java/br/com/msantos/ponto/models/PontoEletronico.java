@@ -51,7 +51,7 @@ public class PontoEletronico {
 
 	private boolean justificativa = false;
 
-	private String transacaoId = "T" + System.currentTimeMillis();
+	private String transacaoId = "TR" + System.currentTimeMillis();
 
 	@ManyToOne
 	private Funcionario funcionario;

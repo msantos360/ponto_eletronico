@@ -2,13 +2,13 @@ package br.com.msantos.ponto.models;
 
 public interface EstadoAtualPonto {
 	
-	public void inicioJornada(PontoEletronico pontoEletronico);
+	void inicioJornada(PontoEletronico pontoEletronico);
 	
-	public void inicioIntervalo(PontoEletronico pontoEletronico);
+	void inicioIntervalo(PontoEletronico pontoEletronico);
 	
-	public void terminoIntervalo(PontoEletronico pontoEletronico);
+	void terminoIntervalo(PontoEletronico pontoEletronico);
 	
-	public void terminoJornada(PontoEletronico pontoEletronico);
+	void terminoJornada(PontoEletronico pontoEletronico);
 	
 	
 }

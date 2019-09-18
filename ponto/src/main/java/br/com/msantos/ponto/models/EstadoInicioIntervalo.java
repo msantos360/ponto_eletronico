@@ -6,15 +6,16 @@ import java.time.LocalTime;
 
 public class EstadoInicioIntervalo implements EstadoAtualPonto {
 	
+	private String mensagem = "Funcionário deve iniciar o intervalo";
+	
 	@Override
 	public void inicioJornada(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Funcionário deve terminar a jornada 1");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void inicioIntervalo(PontoEletronico pontoEletronico) {
-		System.out.println("Saindo para o intervalo");
 //		pontoEletronico.inicioIntervalo = LocalDateTime.now();
 		pontoEletronico.estado = new EstadoTerminoIntervalo();
 		
@@ -25,13 +26,13 @@ public class EstadoInicioIntervalo implements EstadoAtualPonto {
 	@Override
 	public void terminoIntervalo(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Funcionário deve terminar o intervalo 3");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void terminoJornada(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Funcionário deve terminar o intervalo 4");
+		throw new RuntimeException(mensagem);
 	}
 
 }

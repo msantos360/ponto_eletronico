@@ -6,22 +6,23 @@ import java.time.LocalTime;
 
 public class EstadoTerminoIntervalo implements EstadoAtualPonto {
 
+	private String mensagem = "Funcionário deve terminar o intervalo.";
+	
 	@Override
 	public void inicioJornada(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode voltar ao inicio da jornada");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void inicioIntervalo(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode voltar ao inicio do intervalo");
+		throw new RuntimeException(mensagem);
 	}
 
 	@Override
 	public void terminoIntervalo(PontoEletronico pontoEletronico) {
 		
-		System.out.println("Voltando do intervalo");
 //		pontoEletronico.terminoIntervalo = LocalDateTime.now();
 		pontoEletronico.estado = new EstadoTerminoJornada();
 		
@@ -32,7 +33,7 @@ public class EstadoTerminoIntervalo implements EstadoAtualPonto {
 	@Override
 	public void terminoJornada(PontoEletronico pontoEletronico) {
 		
-		throw new RuntimeException("Não pode voltar ao inicio do intervalo");
+		throw new RuntimeException(mensagem);
 	}
 
 }
